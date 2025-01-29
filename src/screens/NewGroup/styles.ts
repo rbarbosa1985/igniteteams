@@ -7,6 +7,7 @@ export const Container = styled.View`
   padding: 24px;
 `;
 
+
 export const Content = styled.View`
   flex: 1;
   justify-content: center;
@@ -15,6 +16,7 @@ export const Content = styled.View`
 export const Icon = styled(UsersThree).attrs(({ theme }) => ({
   size: 56,
   color: theme.COLORS.GREEN_700,
+  
 }))`
   align-self: center;
 `;
