@@ -3,25 +3,41 @@ import { GroupCard } from "@components/GroupCard";
 import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
 import { ListEmpty } from "@components/ListEmpty";
-import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
-import { FlatList } from "react-native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useCallback, useState } from "react";
+import { Alert, FlatList } from "react-native";
 
 import { Container } from "./styles";
+import { groupsGetAll } from "@storage/group/groupsGetAll";
+import { AppError } from "@utils/AppError";
 
 export function Groups() {
-  const [groups, setGroups] = useState<string[]>([
-    "Rocket",
-    "Galera do Ignite",
-    "Grupo de amigos",
-    "Família",
-  ]);
+  const [groups, setGroups] = useState<string[]>([]);
 
   const navigation = useNavigation();
 
   function handleNewGroup(){
     navigation.navigate('newGroup');
   }
+
+  async function fetchGroups() {
+    try {
+      const data = await groupsGetAll();
+      setGroups(data);
+
+    } catch (error) {
+      
+      Alert.alert('Ignite Teams', 'Erro ao carregar os grupos.');
+      console.log(error);
+      
+      
+    }
+  }
+
+  useFocusEffect(
+    useCallback(() => {
+    fetchGroups();
+  }, []));
 
   return (
     <Container>
