@@ -43,7 +43,12 @@ export function NewGroup() {
           title="Nova turma"
           subtitle="Crie uma nova turma para jogar com seus amigos!"
         />
-        <Input placeholder="Nome da turma." onChangeText={setGroup} />
+        <Input 
+          placeholder="Nome da turma." 
+          onChangeText={setGroup}  
+          onSubmitEditing={handleNew}
+          returnKeyType="done"
+        />
         <Button title="Criar" style={{ marginTop: 20 }} onPress={handleNew} />
       </Content>
     </Container>

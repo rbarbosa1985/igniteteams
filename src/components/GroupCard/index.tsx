@@ -10,14 +10,8 @@ type Props = TouchableOpacityProps & {
 export function GroupCard({ title, ...rest }: Props) {
   const navigation = useNavigation();
 
-  function handleNavigate() {
-    navigation.navigate("players", {
-      group: title,
-    });
-  }
-
   return (
-    <Container {...rest} onPress={handleNavigate}>
+    <Container {...rest} >
       <Icon />
       <Title>{title}</Title>
     </Container>
